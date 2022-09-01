@@ -19,15 +19,15 @@ public class Plant {
 	@Column(name = "wateringperiod")
 	private int wateringPeriod;
 	@Column(name = "nextwateringdate")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date nextWateringDate;
+	//@Temporal(TemporalType.DATE) //todo: make Date type
+	//@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private String nextWateringDate;
 	
 	public Plant() {
 	
 	}
 	
-	public Plant(String name, int wateringPeriod, Date wateringDate) {
+	public Plant(String name, int wateringPeriod, String wateringDate) {
 		this.name = name;
 		this.wateringPeriod = wateringPeriod;
 		this.nextWateringDate = wateringDate;
@@ -59,11 +59,11 @@ public class Plant {
 		this.wateringPeriod = wateringPeriod;
 	}
 	
-	public Date getNextWateringDate() {
+	public String getNextWateringDate() {
 		return nextWateringDate;
 	}
 	
-	public void setNextWateringDate(Date nextWateringDate) {
+	public void setNextWateringDate(String nextWateringDate) {
 		this.nextWateringDate = nextWateringDate;
 	}
 	
