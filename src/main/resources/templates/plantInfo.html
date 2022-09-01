@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>Info</title>
@@ -9,5 +9,12 @@
 <p th:text="${plant.getName()}"></p>
 <p th:text="${plant.getWateringPeriod()}"></p>
 <p th:text="${plant.getNextWateringDate()}"></p>
+
+<form th:method="DELETE" th:action="@{/plants/{id}(id=${plant.getId()})}">
+	<input type="submit" value="Delete">
+</form>
+<form th:method="GET" th:action="@{/plants/{id}/edit(id=${plant.getId()})}">
+	<input type="submit" value="Edit">
+</form>
 </body>
 </html>

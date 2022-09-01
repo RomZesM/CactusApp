@@ -43,4 +43,9 @@ public class PlantService {
 		changedPlant.setId(id); //cnahged plant from thymeleaf without id
 		plantRepository.save(changedPlant); //if hibernate find same id, it would update it
 	}
+	
+	@Transactional
+	public void delete(int id){
+		plantRepository.deleteById(id);
+	}
 }

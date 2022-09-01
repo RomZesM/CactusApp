@@ -5,7 +5,10 @@ import com.romzes.cactusProject.servicies.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -38,9 +41,14 @@ public class PlantController {
 	}
 	
 	@PostMapping()
-	public String createNewPlant(@ModelAttribute("plant") Plant plant){
+	public String createNewPlant(@ModelAttribute("plant") @Valid Plant plant, BindingResult bindingResult){
 		
-		System.out.println(plant);
+		if(bindingResult.hasErrors())
+		{
+			System.out.println("Error catch!");
+			return "newPlantForm";
+		}
+		
 		plantService.save(plant);
 		return "redirect:/plants/index";
 	}
@@ -52,9 +60,17 @@ public class PlantController {
 		return "edit";
 	}
 	@PatchMapping("/{id}")
-	public String updatePlant(@PathVariable("id") int id, @ModelAttribute("plant") Plant plant){
+	public String updatePlant(@PathVariable("id") int id, @ModelAttribute("plant")
+								@Valid Plant plant, BindingResult bindingResult){
+		if(bindingResult.hasErrors())
+			return "edit";
 		plantService.update(id, plant);
 		
+		return "redirect:/plants/index";
+	}
+	@DeleteMapping("/{id}")
+	public String deletePlant(@PathVariable("id") int id){
+		plantService.delete(id);
 		return "redirect:/plants/index";
 	}
 	

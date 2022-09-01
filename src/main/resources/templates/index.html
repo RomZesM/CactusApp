@@ -6,8 +6,11 @@
 </head>
 <body>
 	<div th:each="plant : ${plantsList}">
-    <p th:text="${plant.getName()} + ', ' + ${plant.getNextWateringDate()} +', ' +
-     ${plant.getWateringPeriod()}"></p>
+    <a th:href="@{/plants/{id}(id=${plant.getId()})}"
+		th:text="${plant.getName()} + ', ' + ${plant.getNextWateringDate()} +', ' +
+     ${plant.getWateringPeriod()}"></a>
 	</div>
+	<hr/>
+	<a th:href="@{/plants/new}">"Create new plant"</a>
 </body>
 </html>

@@ -3,6 +3,9 @@ package com.romzes.cactusProject.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -14,8 +17,11 @@ public class Plant {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@NotEmpty(message = "Name should not be empty")
 	@Column(name = "name")
 	private String name;
+	@Min(value = 1, message = "You really need to water your plant") //validation
+	@Max(value = 30)
 	@Column(name = "wateringperiod")
 	private int wateringPeriod;
 	@Column(name = "nextwateringdate")
