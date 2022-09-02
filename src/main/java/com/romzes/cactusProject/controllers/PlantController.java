@@ -27,8 +27,7 @@ public class PlantController {
 	public String index(Model model){
 		model.addAttribute("plantsList", plantService.getPlantsList());
 		//
-		String str = plantService.getPlantById(1).getNextWateringDate().toString();
-		System.out.println(str);
+		plantService.getTodayPlantsList();
 		//
 		return "index";
 	}

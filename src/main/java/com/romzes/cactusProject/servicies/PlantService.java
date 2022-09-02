@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PlantService {
@@ -26,6 +24,21 @@ public class PlantService {
 	public List<Plant> getPlantsList(){
 		ArrayList<Plant> plantList = new ArrayList<>();
 		plantList = (ArrayList<Plant>) plantRepository.findAll();
+		return plantList;
+	}
+
+	public List<Plant> getTodayPlantsList(){
+		ArrayList<Plant> plantList = new ArrayList<>();
+		plantList = (ArrayList<Plant>) plantRepository.findAll();
+		ArrayList<Plant> plantsForWatering = new ArrayList<>();
+		Date today = new GregorianCalendar().getTime(); //get current date
+
+		for(Plant p: plantList){
+			System.out.println("today: " + today + " : " + "waterDay: " + p.getNextWateringDate());
+			System.out.println(today.compareTo(p.getNextWateringDate()));
+			if(today.compareTo(p.getNextWateringDate()) == 0)
+				System.out.println("equals!");
+		}
 		return plantList;
 	}
 	
