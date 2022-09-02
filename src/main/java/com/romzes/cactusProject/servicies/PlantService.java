@@ -4,6 +4,7 @@ package com.romzes.cactusProject.servicies;
 import com.romzes.cactusProject.models.Plant;
 import com.romzes.cactusProject.repositories.PlantRepository;
 
+import com.romzes.cactusProject.utils.MyDateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class PlantService {
 	}
 	@Transactional
 	public void save(Plant plant){
+		plant.setNextWateringDate(MyDateUtils.getDateOfNextWatering(plant.getWateringPeriod()));
 		plantRepository.save(plant);
 	}
 	

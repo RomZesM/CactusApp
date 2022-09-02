@@ -2,6 +2,7 @@ package com.romzes.cactusProject.controllers;
 
 import com.romzes.cactusProject.models.Plant;
 import com.romzes.cactusProject.servicies.PlantService;
+import com.romzes.cactusProject.utils.MyDateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,10 @@ public class PlantController {
 	@GetMapping("/index") //show all plants
 	public String index(Model model){
 		model.addAttribute("plantsList", plantService.getPlantsList());
+		//
+		String str = plantService.getPlantById(1).getNextWateringDate().toString();
+		System.out.println(str);
+		//
 		return "index";
 	}
 	
@@ -74,4 +79,10 @@ public class PlantController {
 		return "redirect:/plants/index";
 	}
 	
+	@GetMapping("/plants/today") //testing, show today weatering plants
+	public String showTodayWatering(){
+		
+		
+		return "today";
+	}
 }
